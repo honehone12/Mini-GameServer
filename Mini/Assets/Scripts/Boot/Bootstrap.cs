@@ -31,7 +31,7 @@ namespace Mini
                     NetworkManager.Singleton.StartHost();
                     break;
                 case BootType.Dev:
-                    Debug.Log("OkaeriNasaimase, goshyujinsama.");
+                    Debug.Log($"OkaeriNasaimase, goshyujinsama {uuid}.");
                     break;
                 default:
                     throw new System.Exception("unexpected boot type");
