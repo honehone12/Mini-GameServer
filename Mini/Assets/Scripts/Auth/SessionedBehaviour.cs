@@ -20,7 +20,7 @@ namespace Mini
 
         IEnumerator Authorize()
         {
-            var req = UnityWebRequest.Get(RequestUrl("/authorize"));
+            using var req = UnityWebRequest.Get(RequestUrl("/authorize"));
             yield return req.SendWebRequest();
 
             if (req.result == UnityWebRequest.Result.Success)
