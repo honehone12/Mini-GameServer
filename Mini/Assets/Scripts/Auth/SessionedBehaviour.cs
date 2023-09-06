@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 namespace Mini
 {
-    [System.Serializable]
-    public class AuthorizedResponse
-    {
-        public string Uuid;
-    }
-
     public abstract class SessionedBehaviour : HttpClientBehaviour
     {
+        [System.Serializable]
+        public class AuthorizedResponse
+        {
+            public string Uuid;
+            public string SessionId;
+        }
+
         protected virtual void Start()
         {
             _ = StartCoroutine(Authorize());
@@ -26,7 +27,7 @@ namespace Mini
             if (req.result == UnityWebRequest.Result.Success)
             {
                 var res = JsonUtility.FromJson<AuthorizedResponse>(req.downloadHandler.text);
-                OnSuccessfullyAuthorized(res.Uuid);
+                OnSuccessfullyAuthorized(res.Uuid, res.SessionId);
             }
             else
             {
@@ -35,6 +36,6 @@ namespace Mini
             }
         }
 
-        protected abstract void OnSuccessfullyAuthorized(string uuid);
+        protected abstract void OnSuccessfullyAuthorized(string uuid, string sessionId);
     }
 }
