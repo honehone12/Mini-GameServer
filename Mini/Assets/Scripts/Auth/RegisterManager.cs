@@ -7,8 +7,6 @@ namespace Mini
 {
     public class RegisterManager : AuthHttpClientBehaviour
     {
-        Coroutine registrationCoroutine;
-
         public void OnLoginButtonClicked()
         {
             _ = StartCoroutine(LoadLoginScene());
@@ -21,7 +19,7 @@ namespace Mini
 
         public void OnRegisterButtonClicked()
         {
-            registrationCoroutine = StartCoroutine(SendRegisterRequest());
+            _ = StartCoroutine(SendRegisterRequest());
         }
 
         IEnumerator SendRegisterRequest()

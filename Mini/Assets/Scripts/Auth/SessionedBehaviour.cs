@@ -11,7 +11,7 @@ namespace Mini
         public class AuthorizedResponse
         {
             public string Uuid;
-            public string SessionId;
+            public string OneTimeId;
         }
 
         protected virtual void Start()
@@ -27,7 +27,7 @@ namespace Mini
             if (req.result == UnityWebRequest.Result.Success)
             {
                 var res = JsonUtility.FromJson<AuthorizedResponse>(req.downloadHandler.text);
-                OnSuccessfullyAuthorized(res.Uuid, res.SessionId);
+                OnSuccessfullyAuthorized(res.Uuid, res.OneTimeId);
             }
             else
             {
@@ -36,6 +36,6 @@ namespace Mini
             }
         }
 
-        protected abstract void OnSuccessfullyAuthorized(string uuid, string sessionId);
+        protected abstract void OnSuccessfullyAuthorized(string uuid, string oneTimeId);
     }
 }

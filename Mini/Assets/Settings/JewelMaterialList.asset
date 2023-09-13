@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialList:
   - material: {fileID: 2100000, guid: 02c333efc3e069c46a1d0b2e28f95bff, type: 2}
-    type: 0
+    colorCode: 1
   - material: {fileID: 2100000, guid: 75b18c59c2471ea41bf4ef11f13034cf, type: 2}
-    type: 1
+    colorCode: 2
   - material: {fileID: 2100000, guid: a863575ce0d570649b039116472a8812, type: 2}
-    type: 2
+    colorCode: 3
   - material: {fileID: 2100000, guid: a17a97bfc04b5794786607394a3d61bd, type: 2}
-    type: 3
+    colorCode: 4
   - material: {fileID: 2100000, guid: 620f35c921efbb642a278737170d2bb2, type: 2}
-    type: 4
+    colorCode: 5

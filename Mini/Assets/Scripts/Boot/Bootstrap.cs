@@ -7,11 +7,54 @@ namespace Mini
     [RequireComponent(typeof(NetworkManager))]
     public class Bootstrap : SessionedBehaviour
     {
+        public static Bootstrap Singleton
+        {
+            get; private set;
+        }
+
+        public static string UserUUID
+        {
+            get; private set;
+        }
+
+        public static string OneTimeID
+        {
+            get; private set;
+        }
+
+        public static bool IsReadyAsClient
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(UserUUID) && !string.IsNullOrEmpty(OneTimeID);
+            }
+        }
+
         [SerializeField]
         BootType bootType;
         [Space]
         public UnityEvent OnServerStarted = new();
-        public UnityEvent<Player> OnClientStarted = new();
+        public UnityEvent OnClientStarted = new();
+
+        public BootType BootType
+        {
+            get
+            {
+                return bootType;
+            }
+        }
+
+        void Awake()
+        {
+            if (Singleton == null)
+            {
+                Singleton = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         protected override void Start()
         {
@@ -23,20 +66,12 @@ namespace Mini
                     break;
                 case BootType.UnauthorizedClient:
                     NetworkManager.Singleton.StartClient();
-                    OnClientStarted.Invoke(new Player
-                    {
-                        playerType = BootType.UnauthorizedClient,
-                        uuid = string.Empty
-                    });
+                    OnClientStarted.Invoke();
                     break;
                 case BootType.UnauthorizedHost:
                     NetworkManager.Singleton.StartHost();
                     OnServerStarted.Invoke();
-                    OnClientStarted.Invoke(new Player
-                    {
-                        playerType = BootType.UnauthorizedHost,
-                        uuid = string.Empty
-                    });
+                    OnClientStarted.Invoke();
                     break;
                 case BootType.Client:
                 case BootType.Host:
@@ -47,38 +82,26 @@ namespace Mini
             }
         }
 
-        protected override void OnSuccessfullyAuthorized(string userUuid, string sessionId)
+        protected override void OnSuccessfullyAuthorized(string uuid, string oneTimeId)
         {
             switch (bootType)
             {
                 case BootType.Client:
+                    UserUUID = uuid;
+                    OneTimeID = oneTimeId;
                     NetworkManager.Singleton.StartClient();
-                    OnClientStarted.Invoke(new Player
-                    {
-                        playerType = BootType.Client,
-                        uuid = userUuid
-                    });
+                    OnClientStarted.Invoke();
                     break;
                 case BootType.Host:
+                    UserUUID = uuid;
+                    OneTimeID = oneTimeId;
                     NetworkManager.Singleton.StartHost();
                     OnServerStarted.Invoke();
-                    OnClientStarted.Invoke(new Player
-                    {
-                        playerType = BootType.Host,
-                        uuid = userUuid
-                    });
+                    OnClientStarted.Invoke();
                     break;
                 default:
                     throw new System.Exception("unexpected boot type");
             }
-        }
-
-        // This RPC is still self-declared.
-        // Or is it bettter to send raw cookie ??
-        [ServerRpc]
-        public void IntroduceMySelfServerRpc(BootType playerType, string playerUuid, string sessionId)
-        {
-
         }
     }
 }

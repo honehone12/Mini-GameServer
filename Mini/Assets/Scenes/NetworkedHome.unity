@@ -339,7 +339,8 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 475787017}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 2579185059915254522, guid: e6d8b725a42b8b3458202b41dcb3bf79,
+      type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 9f90f59168c2c2a48aa1c1243568d8f8, type: 2}
@@ -375,7 +376,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uri: 192.168.11.56
   port: 9990
-  bootType: 2
+  bootType: 3
+  OnServerStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 748549510}
+        m_TargetAssemblyTypeName: Mini.JewelSpawner, Assembly-CSharp
+        m_MethodName: SpawnJewels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnClientStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &475787016
 Transform:
   m_ObjectHideFlags: 0
@@ -418,6 +437,54 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+--- !u!1 &748549509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 748549511}
+  - component: {fileID: 748549510}
+  m_Layer: 0
+  m_Name: JewelSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &748549510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748549509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a367a84f1b7318349aab49304c40f3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numSpawn: 10
+  jewelPrefab: {fileID: 5594202956199129540, guid: fd64c295e2cec244d97c40c3a7e76cdc,
+    type: 3}
+  areaCollider: {fileID: 766257264}
+--- !u!4 &748549511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748549509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &766257258
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,79 +1022,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &2444790627997103505
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1861942856354043803, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1768293267
-      objectReference: {fileID: 0}
-    - target: {fileID: 2579185059915254522, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_Name
-      value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214907004313250709, guid: e6d8b725a42b8b3458202b41dcb3bf79,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e6d8b725a42b8b3458202b41dcb3bf79, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1035,5 +1029,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 766257263}
-  - {fileID: 2444790627997103505}
   - {fileID: 475787016}
+  - {fileID: 748549511}

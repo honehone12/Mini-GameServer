@@ -7,25 +7,28 @@ namespace Mini
     public class NetworkJewel : NetworkBehaviour
     {
         [SerializeField]
+        int incrementOnCollect = 1;
+        [Space]
+        [SerializeField]
         JewelMaterialList materialList;
         [SerializeField]
         MeshRenderer meshRenderer;
 
-        JewelType jewelType = JewelType.NotSelected;
+        ColorCode colorCode = ColorCode.NotSelected;
         NetworkObject networkObjectComponent;
 
         void Awake()
         {
             Assert.IsNotNull(materialList);
             Assert.IsNotNull(meshRenderer);
-            Assert.IsTrue(TryGetComponent<NetworkObject>(out networkObjectComponent));
+            Assert.IsTrue(TryGetComponent(out networkObjectComponent));
         }
 
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
             var jewelMat = materialList.Random();
-            jewelType = jewelMat.type;
+            colorCode = jewelMat.colorCode;
             meshRenderer.material = jewelMat.material;
         }
 
@@ -33,8 +36,9 @@ namespace Mini
         {
             if (IsServer)
             {
-                if (other.TryGetComponent<NetworkCharacterController>(out var player))
+                if (other.TryGetComponent<NetworkJewelCollector>(out var collector))
                 {
+                    collector.CollectJewel(colorCode, incrementOnCollect);
                     networkObjectComponent.Despawn();
                 }
             }

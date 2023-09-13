@@ -1,12 +1,12 @@
 namespace Mini
 {
-    public enum JewelType : byte
+    public enum ColorCode : byte
     {
+        NotSelected,
         Red,
         Blue,
         Green,
         Yellow,
-        Black,
-        NotSelected
+        Black
     }
 }

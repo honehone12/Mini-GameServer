@@ -6,6 +6,6 @@ namespace Mini
     public class JewelMaterial
     {
         public Material material;
-        public JewelType type = JewelType.NotSelected;
+        public ColorCode colorCode = ColorCode.NotSelected;
     }
 }

@@ -94,6 +94,8 @@ GameObject:
   - component: {fileID: 6214907004313250709}
   - component: {fileID: 7729452969636492942}
   - component: {fileID: 3140475829828014532}
+  - component: {fileID: 2596114970115988467}
+  - component: {fileID: 9206230981303513643}
   - component: {fileID: 1861942856354043803}
   - component: {fileID: 3686499402373030780}
   m_Layer: 0
@@ -167,6 +169,32 @@ MonoBehaviour:
   rotationVertical: Mouse Y
   virtualCamera: {fileID: 6120721005352968587}
   characterCamera: {fileID: 3710001704520549331}
+--- !u!114 &2596114970115988467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579185059915254522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ed778ccb5c6f24d8735f93e5099377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  communicator: {fileID: 11400000, guid: ebdffb112622343408cea8ab9edb7951, type: 2}
+--- !u!114 &9206230981303513643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579185059915254522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9113a07b3431bcb488e0e037b72ba5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  communicator: {fileID: 11400000, guid: ebdffb112622343408cea8ab9edb7951, type: 2}
 --- !u!114 &1861942856354043803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6762550197010609579}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22975291, y: 0.0000000187227, z: -0.0000000044198294, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.0000000187227, z: 0.0000000044198294, w: 0.973249}
   m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -412,7 +440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9126340962141946072}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22975291, y: 0.0000000187227, z: -0.0000000044198294, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.0000000187227, z: 0.0000000044198294, w: 0.973249}
   m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

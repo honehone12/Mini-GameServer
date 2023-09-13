@@ -7,8 +7,6 @@ namespace Mini
 {
     public class LoginManager : AuthHttpClientBehaviour
     {
-        Coroutine loginCoroutine;
-
         public void OnSignUpButtonClicked()
         {
             _ = StartCoroutine(LoadRegisterScene());
@@ -21,7 +19,7 @@ namespace Mini
 
         public void OnLoginButtonClicked()
         {
-            loginCoroutine = StartCoroutine(SendLoginRequest());
+            _ = StartCoroutine(SendLoginRequest());
         }
 
         IEnumerator SendLoginRequest()
@@ -36,7 +34,7 @@ namespace Mini
             {
                 requestOKPanel.SetActive(true);
                 yield return new WaitForSeconds(0.5f);
-                yield return SceneManager.LoadSceneAsync("Dev");
+                yield return SceneManager.LoadSceneAsync("NetworkedHome");
             }
             else
             {
