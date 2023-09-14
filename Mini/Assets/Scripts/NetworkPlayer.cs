@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Assertions;
 using Unity.Netcode;
+using UnityEngine.Events;
 
 namespace Mini
 {
@@ -11,6 +11,8 @@ namespace Mini
     {
         [SerializeField]
         MicroserviceCommunicator communicator;
+        [Space]
+        public UnityEvent OnOneTimeIdVerified = new();
 
         void Awake()
         {
@@ -29,10 +31,16 @@ namespace Mini
             }
         }
 
-        [ServerRpc(RequireOwnership = true, Delivery = RpcDelivery.Reliable)]
-        public void IntroduceMySelfServerRpc(string playerUuid, string oneTimeId, ServerRpcParams serverRpcParams = default)
+        [ClientRpc(Delivery = RpcDelivery.Reliable)]
+        public void ResponseOneTimeIdVerifiedClientRpc(ClientRpcParams rpcParams = default)
         {
-            _ = StartCoroutine(VerifyOneTimeId(playerUuid, oneTimeId, serverRpcParams.Receive.SenderClientId));
+            OnOneTimeIdVerified.Invoke();
+        }
+
+        [ServerRpc(RequireOwnership = true, Delivery = RpcDelivery.Reliable)]
+        public void IntroduceMySelfServerRpc(string playerUuid, string oneTimeId, ServerRpcParams rpcParams = default)
+        {
+            _ = StartCoroutine(VerifyOneTimeId(playerUuid, oneTimeId, rpcParams.Receive.SenderClientId));
 
             // here also can be used for name etc...and share between players with NetworkVariable
         }
@@ -47,7 +55,13 @@ namespace Mini
 
             if (req.result == UnityWebRequest.Result.Success)
             {
-            
+                ResponseOneTimeIdVerifiedClientRpc(new ClientRpcParams
+                {
+                    Send = new ClientRpcSendParams
+                    {
+                        TargetClientIds = new ulong[] { netcodeID }
+                    }
+                });
             }
             else
             {

@@ -22,27 +22,13 @@ namespace Mini
             get; private set;
         }
 
-        public static bool IsReadyAsClient
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(UserUUID) && !string.IsNullOrEmpty(OneTimeID);
-            }
-        }
-
         [SerializeField]
         BootType bootType;
         [Space]
         public UnityEvent OnServerStarted = new();
         public UnityEvent OnClientStarted = new();
 
-        public BootType BootType
-        {
-            get
-            {
-                return bootType;
-            }
-        }
+        public BootType BootType => bootType;
 
         void Awake()
         {
