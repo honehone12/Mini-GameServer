@@ -19,18 +19,6 @@ namespace Mini
             Assert.IsNotNull(communicator);
         }
 
-        public void CollectJewel(ColorCode color, int incr)
-        {
-            if (IsClient && IsOwner)
-            {
-                var bootType = Bootstrap.Singleton.BootType;
-                if (bootType == BootType.Client || bootType == BootType.Host)
-                {
-                    IncrementJewelServerRpc(Bootstrap.UserUUID, color, incr);
-                }
-            }
-        }
-
         public void SyncJewelData()
         {
             if (IsClient && IsOwner)
@@ -41,6 +29,12 @@ namespace Mini
                     RequestJewelDataServerRpc(Bootstrap.UserUUID);
                 }
             }
+        }
+
+        public void IncrementJewel(string uuid, ColorCode color, int incr)
+        {
+            var netcodeId = NetworkObject.OwnerClientId;
+            _ = StartCoroutine(IncrJewel(uuid, color, incr, netcodeId));
         }
 
         [ClientRpc(Delivery = RpcDelivery.Reliable)]
@@ -61,12 +55,6 @@ namespace Mini
         public void RequestJewelDataServerRpc(string uuid, ServerRpcParams rpcParams = default)
         {
             _ = StartCoroutine(GetAll(uuid, rpcParams.Receive.SenderClientId));
-        }
-
-        [ServerRpc(RequireOwnership = true, Delivery = RpcDelivery.Reliable)]
-        public void IncrementJewelServerRpc(string uuid, ColorCode color, int incr, ServerRpcParams rpcParams = default)
-        {
-            _ = StartCoroutine(IncrJewel(uuid, color, incr, rpcParams.Receive.SenderClientId));
         }
 
         IEnumerator IncrJewel(string uuid, ColorCode color, int incr, ulong netcodeId)

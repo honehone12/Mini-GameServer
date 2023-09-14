@@ -14,9 +14,17 @@ namespace Mini
         [Space]
         public UnityEvent OnOneTimeIdVerified = new();
 
+        string userUuidServerCache;
+
         void Awake()
         {
             Assert.IsNotNull(communicator);
+        }
+
+        public bool TryGetUserUuidServerCache(out string uuid)
+        {
+            uuid = userUuidServerCache;
+            return string.IsNullOrEmpty(userUuidServerCache);
         }
 
         public override void OnNetworkSpawn()
@@ -40,6 +48,7 @@ namespace Mini
         [ServerRpc(RequireOwnership = true, Delivery = RpcDelivery.Reliable)]
         public void IntroduceMySelfServerRpc(string playerUuid, string oneTimeId, ServerRpcParams rpcParams = default)
         {
+            userUuidServerCache = playerUuid;
             _ = StartCoroutine(VerifyOneTimeId(playerUuid, oneTimeId, rpcParams.Receive.SenderClientId));
 
             // here also can be used for name etc...and share between players with NetworkVariable

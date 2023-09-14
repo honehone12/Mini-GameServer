@@ -694,7 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uri: 192.168.11.56
   port: 9990
-  bootType: 3
+  bootType: 1
   OnServerStarted:
     m_PersistentCalls:
       m_Calls:

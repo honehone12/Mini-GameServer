@@ -36,10 +36,14 @@ namespace Mini
         {
             if (IsServer)
             {
-                if (other.TryGetComponent<NetworkJewelCollector>(out var collector))
+                if (other.TryGetComponent<NetworkPlayer>(out var player) && 
+                    other.TryGetComponent<NetworkJewelCollector>(out var collector))
                 {
-                    collector.CollectJewel(colorCode, incrementOnCollect);
-                    networkObjectComponent.Despawn();
+                    if (player.TryGetUserUuidServerCache(out var uuid))
+                    {
+                        collector.IncrementJewel(uuid, colorCode, incrementOnCollect);
+                        networkObjectComponent.Despawn();
+                    }
                 }
             }
         }
