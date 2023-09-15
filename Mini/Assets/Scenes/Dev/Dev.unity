@@ -252,6 +252,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnClientStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!43 &121395352
 Mesh:
   m_ObjectHideFlags: 0
@@ -887,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a367a84f1b7318349aab49304c40f3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingList: {fileID: 11400000, guid: 87ee3656249386e4f837dc86ad295fc7, type: 2}
   numSpawn: 10
   jewelPrefab: {fileID: 5594202956199129540, guid: fd64c295e2cec244d97c40c3a7e76cdc,
     type: 3}

@@ -8,6 +8,8 @@ namespace Mini
     public class JewelSpawner : MonoBehaviour
     {
         [SerializeField]
+        JewelSettingList settingList;
+        [SerializeField]
         int numSpawn;
         [Space]
         [SerializeField]
@@ -17,6 +19,7 @@ namespace Mini
 
         void Awake()
         {
+            Assert.IsNotNull(settingList);
             Assert.IsNotNull(jewelPrefab);
             Assert.IsNotNull(areaCollider);
             Assert.IsTrue(numSpawn > 0);
@@ -50,12 +53,18 @@ namespace Mini
                     }
                 }
                 posList.Add(pos);
+                
                 var go = Instantiate(jewelPrefab, pos, rot);
-                if (!go.TryGetComponent<NetworkObject>(out var jewel))
+                var setting = settingList.Random();
+                if (go.TryGetComponent<NetworkJewel>(out var nj))
                 {
-                    Assert.IsTrue(false);
+                    nj.ApplySetting(setting);
                 }
-                jewel.Spawn(true);
+
+                if (go.TryGetComponent<NetworkObject>(out var no))
+                {
+                    no.Spawn(true);
+                }
             }
 
             posList.Dispose();

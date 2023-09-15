@@ -4,36 +4,36 @@ using UnityEngine.Assertions;
 
 namespace Mini
 {
-    [CreateAssetMenu(menuName = "JewelMaterialList")]
-    public class JewelMaterialList : ScriptableObject
+    [CreateAssetMenu(menuName = "JewelSettingList")]
+    public class JewelSettingList : ScriptableObject
     {
         [SerializeField]
-        List<JewelMaterial> materialList = new();
+        List<JewelSetting> settingList = new();
 
         public int Count
         {
             get
             {
-                var len = materialList.Count;
+                var len = settingList.Count;
                 Assert.IsTrue(len > 0);
                 return len;
             }
         }
 
-        public JewelMaterial Get(int index)
+        public JewelSetting Get(int index)
         {
-            var len = materialList.Count;
+            var len = settingList.Count;
             Assert.IsTrue(len > 0);
             Assert.IsTrue(index > 0 && index < len);
-            return materialList[index];
+            return settingList[index];
         }
 
-        public JewelMaterial Random()
+        public JewelSetting Random()
         {
-            var len = materialList.Count;
+            var len = settingList.Count;
             Assert.IsTrue(len > 0);
             var idx = UnityEngine.Random.Range(0, len);
-            return materialList[idx];
+            return settingList[idx];
         }
     }
 }

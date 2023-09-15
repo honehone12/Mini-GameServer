@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b66256594033e24bb8edeefb199f8e6, type: 3}
-  m_Name: JewelMaterialList
+  m_Name: JewelSettingList
   m_EditorClassIdentifier: 
-  materialList:
+  settingList:
   - material: {fileID: 2100000, guid: 02c333efc3e069c46a1d0b2e28f95bff, type: 2}
     colorCode: 1
+    incrementOnCollect: 1
   - material: {fileID: 2100000, guid: 75b18c59c2471ea41bf4ef11f13034cf, type: 2}
     colorCode: 2
+    incrementOnCollect: 1
   - material: {fileID: 2100000, guid: a863575ce0d570649b039116472a8812, type: 2}
     colorCode: 3
+    incrementOnCollect: 1
   - material: {fileID: 2100000, guid: a17a97bfc04b5794786607394a3d61bd, type: 2}
     colorCode: 4
+    incrementOnCollect: 1
   - material: {fileID: 2100000, guid: 620f35c921efbb642a278737170d2bb2, type: 2}
     colorCode: 5
+    incrementOnCollect: 1
