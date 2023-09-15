@@ -24,7 +24,7 @@ namespace Mini
         public bool TryGetUserUuidServerCache(out string uuid)
         {
             uuid = userUuidServerCache;
-            return string.IsNullOrEmpty(userUuidServerCache);
+            return !string.IsNullOrEmpty(userUuidServerCache);
         }
 
         public override void OnNetworkSpawn()

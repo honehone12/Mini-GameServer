@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MicroserviceCommunicator
   m_EditorClassIdentifier: 
   protocol: http://
-  ipAddr: 192.168.11.56
+  ipAddr: 127.0.0.1
   port: 9991
