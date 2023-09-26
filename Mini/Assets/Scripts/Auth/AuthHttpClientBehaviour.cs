@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Mini
 {
-    public class AuthHttpClientBehaviour : HttpClientBehaviour
+    public class AuthHttpClientBehaviour : AuthHttpClientBase
     {
         [SerializeField]
         protected Toggle showPassword;
@@ -18,8 +18,9 @@ namespace Mini
         protected string emailTextBuffer;
         protected string passwordTextBuffer;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             Assert.IsNotNull(showPassword);
             Assert.IsNotNull(passwordInputField);
             Assert.IsNotNull(requestOKPanel);

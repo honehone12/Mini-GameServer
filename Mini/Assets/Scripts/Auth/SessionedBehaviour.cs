@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Mini
 {
-    public abstract class SessionedBehaviour : HttpClientBehaviour
+    public abstract class SessionedBehaviour : AuthHttpClientBase
     {
         [System.Serializable]
         public class AuthorizedResponse
@@ -21,7 +21,7 @@ namespace Mini
 
         IEnumerator Authorize()
         {
-            using var req = UnityWebRequest.Get(RequestUrl("/authorize"));
+            using var req = UnityWebRequest.Get(AuthRequestUrl("/authorize"));
             yield return req.SendWebRequest();
 
             if (req.result == UnityWebRequest.Result.Success)

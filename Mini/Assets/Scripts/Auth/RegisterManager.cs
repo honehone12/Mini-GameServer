@@ -27,7 +27,7 @@ namespace Mini
             var form = new WWWForm();
             form.AddField("email", emailTextBuffer);
             form.AddField("password", passwordTextBuffer);
-            using var req = UnityWebRequest.Post(RequestUrl("/register"), form);
+            using var req = UnityWebRequest.Post(AuthRequestUrl("/register"), form);
             yield return req.SendWebRequest();
 
             if (req.result == UnityWebRequest.Result.Success)

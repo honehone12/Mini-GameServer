@@ -2746,8 +2746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eaa2cffadcbf764bad2c45b3f083492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uri: 192.168.11.56
-  port: 9990
+  authAddress: 192.168.11.56
+  authPort: 9990
   showPassword: {fileID: 1131422560}
   passwordInputField: {fileID: 1600609023}
   requestOKPanel: {fileID: 1227957794}
