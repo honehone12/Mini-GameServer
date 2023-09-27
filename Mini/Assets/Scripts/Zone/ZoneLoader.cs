@@ -35,16 +35,26 @@ namespace Mini
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<NetworkPlayer>(out _))
+            if (NetworkManager.Singleton.IsClient )
             {
-                NetworkManager.Singleton.Shutdown();
-                Destroy(NetworkManager.Singleton.gameObject);
-                _ = StartCoroutine(LoaddScene());
+                if (other.TryGetComponent<NetworkPlayer>(out var player))
+                {
+                    if (player.IsOwner)
+                    {
+                        _ = StartCoroutine(ShutdownThenLoaddNewScene());
+                    }
+                }
             }
         }
 
-        IEnumerator LoaddScene()
+        IEnumerator ShutdownThenLoaddNewScene()
         {
+            var nm = NetworkManager.Singleton;
+            nm.Shutdown();
+            yield return new WaitWhile(() => nm.ShutdownInProgress);
+
+            Destroy(nm.gameObject);
+
             yield return SceneManager.LoadSceneAsync(sceneName);
         }
     }

@@ -27,6 +27,11 @@ namespace Mini
 
         public void SpawnJewels()
         {
+            if (!NetworkManager.Singleton.IsServer)
+            {
+                return;
+            }
+
             if (!jewelPrefab.TryGetComponent<SphereCollider>(out var sphere))
             {
                 Assert.IsTrue(false);
@@ -58,7 +63,7 @@ namespace Mini
                 var setting = settingList.Random();
                 if (go.TryGetComponent<NetworkJewel>(out var nj))
                 {
-                    nj.ApplySetting(setting);
+                    nj.ApplySetting(setting.colorCode, setting.incrementOnCollect);
                 }
 
                 if (go.TryGetComponent<NetworkObject>(out var no))

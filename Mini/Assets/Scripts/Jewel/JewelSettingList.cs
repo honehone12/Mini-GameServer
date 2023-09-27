@@ -28,10 +28,17 @@ namespace Mini
             return settingList[index];
         }
 
+        public JewelSetting Find(ColorCode colorCode)
+        {
+            Assert.IsFalse(colorCode == ColorCode.NotSelected);
+            var setting = settingList.Find((s) => s.colorCode == colorCode);
+            Assert.IsNotNull(setting);
+            return setting;
+        }
+
         public JewelSetting Random()
         {
-            var len = settingList.Count;
-            Assert.IsTrue(len > 0);
+            var len = Count;
             var idx = UnityEngine.Random.Range(0, len);
             return settingList[idx];
         }

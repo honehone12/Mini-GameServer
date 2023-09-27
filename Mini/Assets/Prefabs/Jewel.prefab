@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680b9c9476ab75442bfb6f5b8f84eb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialList: {fileID: 11400000, guid: 87ee3656249386e4f837dc86ad295fc7, type: 2}
+  settingList: {fileID: 11400000, guid: 87ee3656249386e4f837dc86ad295fc7, type: 2}
   meshRenderer: {fileID: 7824203334717253288}
 --- !u!114 &8633617131748362778
 MonoBehaviour:

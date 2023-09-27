@@ -7,23 +7,56 @@ namespace Mini
     public class NetworkJewel : NetworkBehaviour
     {
         [SerializeField]
+        JewelSettingList settingList;
+        [SerializeField]
         MeshRenderer meshRenderer;
 
-        ColorCode colorCode = ColorCode.NotSelected;
-        int increment = 0;
         NetworkObject networkObjectComponent;
+        ColorCode colorCodeForMaterial;
+        int incrementOnTriggered;
 
 
         void Awake()
         {
+            Assert.IsNotNull(settingList);
             Assert.IsNotNull(meshRenderer);
             Assert.IsTrue(TryGetComponent(out networkObjectComponent));
         }
 
-        public void ApplySetting(JewelSetting setting)
+        public override void OnNetworkSpawn()
         {
-            colorCode = setting.colorCode;
-            increment = setting.incrementOnCollect;
+            if (IsClient)
+            {
+                RequestJewelSettingServerRpc();
+            }
+        }
+
+        public void ApplySetting(ColorCode colorCode, int increment)
+        {
+            colorCodeForMaterial = colorCode;
+            incrementOnTriggered = increment;
+        }
+
+        [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+        public void RequestJewelSettingServerRpc(ServerRpcParams rpcParams = default)
+        {
+            ResponseJewelSettingClientRpc(
+                colorCodeForMaterial,
+                new ClientRpcParams
+                {
+                    Send = new ClientRpcSendParams
+                    {
+                        TargetClientIds = new ulong[] { rpcParams.Receive.SenderClientId }
+                    }
+                }
+            );
+        }
+
+        [ClientRpc(Delivery = RpcDelivery.Reliable)]
+        public void ResponseJewelSettingClientRpc(ColorCode colorCode, ClientRpcParams rpcParams = default)
+        {
+            var setting = settingList.Find(colorCode);
+            ApplySetting(setting.colorCode, setting.incrementOnCollect);
             meshRenderer.material = setting.material;
         }
 
@@ -36,7 +69,7 @@ namespace Mini
                 {
                     if (player.TryGetUserUuidServerCache(out var uuid))
                     {
-                        collector.IncrementJewel(uuid, colorCode, increment);
+                        collector.IncrementJewel(uuid, colorCodeForMaterial, incrementOnTriggered);
                         networkObjectComponent.Despawn();
                     }
                 }
